@@ -240,6 +240,31 @@ class MediumApi
 
     }
 
+    public function getUserArticles()
+    {
+
+        $this->getUserId();
+
+        $this->getUserArticlesIds();
+
+        foreach ($this->associated_articles_ids as $associated_article_id) {
+
+            $info = $this->getUserArticleInfo($associated_article_id);
+            $markdown = $this->getUserArticleMarkdown($associated_article_id);
+            $content = $this->getUserArticleContent($associated_article_id);
+
+            $this->associated_articles[] = [
+                "article_id" => $associated_article_id,
+                "info" => $info,
+                "markdown" => $markdown,
+                "content" => $content
+            ];
+
+            break;
+        }
+
+    }
+
     public function showUserArticles()
     {
         var_dump($this->associated_articles);

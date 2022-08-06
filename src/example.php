@@ -15,15 +15,17 @@ $env->load();
 
 $api = new MediumApi();
 
-$api->getUserId();
+// $api->getUserId();
 
-$api->getUserArticlesIds();
+// $api->getUserArticlesIds();
 
-$api->getUserArticlesContents();
+// $api->getUserArticlesContents();
 
-$api->getUserArticlesMarkdowns();
+// $api->getUserArticlesMarkdowns();
 
-$api->getUserArticlesInfos();
+// $api->getUserArticlesInfos();
+
+$api->getUserArticles();
 
 var_dump($api);
 
