@@ -33,7 +33,7 @@ class MediumApi
     {
 
         $this->api_key = getenv("MEDIUM_API_KEY");
-        $this->api_host = getenv("MEDIUM-API_HOST");
+        $this->api_host = getenv("MEDIUM_API_HOST");
         $this->user_name = getenv("MEDIUM_USER_NAME");
 
     }
