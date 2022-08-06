@@ -1,10 +1,10 @@
 <?php
 
-namespace src\NishuJainMediumApi;
+namespace src\MediumApi;
 
 // https://rapidapi.com/nishujain199719-vgIfuFHZxVZ/api/medium2/
 
-class NishuJainMediumApi
+class MediumApi
 {
 
     public $api_key = "";

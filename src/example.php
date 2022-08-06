@@ -1,10 +1,10 @@
 <?php 
 
-require_once "NishuJainMediumApi/NishuJainMediumApi.php";
-require_once "NishuJainMediumApi/Env.php";
+require_once "MediumApi/MediumApi.php";
+require_once "MediumApi/Env.php";
 
-use src\NishuJainMediumApi\NishuJainMediumApi;
-use src\NishuJainMediumApi\Env;
+use src\MediumApi\MediumApi;
+use src\MediumApi\Env;
 
 
 $path = dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . ".env";
@@ -13,7 +13,7 @@ $env = new Env($path);
 
 $env->load();
 
-$api = new NishuJainMediumApi();
+$api = new MediumApi();
 
 $api->getUserId();
 

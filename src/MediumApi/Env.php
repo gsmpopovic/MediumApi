@@ -3,7 +3,7 @@
 // Thanks to F.R Michael for this class (which I've tweaked slightly).
 //https://dev.to/fadymr
 
-namespace src\NishuJainMediumApi;
+namespace src\MediumApi;
 
 class Env
 {
