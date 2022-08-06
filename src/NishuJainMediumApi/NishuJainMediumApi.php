@@ -4,8 +4,6 @@ namespace src\NishuJainMediumApi;
 
 // https://rapidapi.com/nishujain199719-vgIfuFHZxVZ/api/medium2/
 
-use src\NishuJainMediumApi\Env as Env;
-
 class NishuJainMediumApi
 {
 
@@ -20,18 +18,19 @@ class NishuJainMediumApi
     public $associated_articles = [];
 
     public $associated_articles_ids = [];
-    
+
     public $associated_articles_infos = [];
 
     public $associated_articles_contents = [];
-    
+
     public $associated_articles_markdowns = [];
 
     public $response = null;
 
     public $err = null;
 
-    public function __construct(){
+    public function __construct()
+    {
 
         $this->api_key = getenv("MEDIUM_API_KEY");
         $this->api_host = getenv("MEDIUM-API_HOST");
@@ -61,8 +60,8 @@ class NishuJainMediumApi
             $timeout = isset($args["timeout"]) ? $args["timeout"] : 30;
 
             $http_version = isset($args["http_version"]) ? $args["http_version"] : CURL_HTTP_VERSION_1_1;
-            
-            $headers = isset($args["headers"]) ? $args["headers"] : 
+
+            $headers = isset($args["headers"]) ? $args["headers"] :
             [
                 "X-RapidAPI-Host: " . $this->api_host,
                 "X-RapidAPI-Key: " . $this->api_key,
@@ -137,8 +136,8 @@ class NishuJainMediumApi
 
     }
 
-    public function getUserArticleContent($associated_article_id){
-
+    public function getUserArticleContent($associated_article_id)
+    {
 
         $url = "https://medium2.p.rapidapi.com/article/" . $associated_article_id . "/content";
 
@@ -173,8 +172,9 @@ class NishuJainMediumApi
 
     }
 
-    public function getUserArticleMarkdown($associated_article_id){
-    
+    public function getUserArticleMarkdown($associated_article_id)
+    {
+
         $url = "https://medium2.p.rapidapi.com/article/" . $associated_article_id . "/markdown";
 
         $params["url"] = $url;
@@ -188,7 +188,7 @@ class NishuJainMediumApi
             return $api_response["markdown"];
 
         }
-    
+
     }
 
     public function getUserArticlesMarkdowns()
@@ -208,7 +208,8 @@ class NishuJainMediumApi
 
     }
 
-    public function getUserArticleInfo($associated_article_id){
+    public function getUserArticleInfo($associated_article_id)
+    {
 
         $url = "https://medium2.p.rapidapi.com/article/" . $associated_article_id;
 
@@ -218,11 +219,12 @@ class NishuJainMediumApi
 
         $api_response = json_decode($this->response, true);
 
-        return $api_response; 
-        
+        return $api_response;
+
     }
 
-    public function getUserArticlesInfos(){
+    public function getUserArticlesInfos()
+    {
 
         foreach ($this->associated_articles_ids as $associated_article_id) {
 
@@ -230,12 +232,12 @@ class NishuJainMediumApi
 
             $this->associated_articles_infos[] = [
                 "article_id" => $associated_article_id,
-                "info" => $info
+                "info" => $info,
             ];
 
             break;
         }
-        
+
     }
 
     public function showUserArticles()

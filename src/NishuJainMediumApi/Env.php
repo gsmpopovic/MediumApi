@@ -1,6 +1,6 @@
 <?php
 
-// Thanks to F.R Michael for this class (which I've tweaked slightly). 
+// Thanks to F.R Michael for this class (which I've tweaked slightly).
 //https://dev.to/fadymr
 
 namespace src\NishuJainMediumApi;
@@ -14,16 +14,15 @@ class Env
      */
     protected $path;
 
-
     public function __construct(string $path)
     {
-        if(!file_exists($path)) {
+        if (!file_exists($path)) {
             throw new \InvalidArgumentException(sprintf('%s does not exist', $path));
         }
         $this->path = $path;
     }
 
-    public function load() :void
+    public function load(): void
     {
         if (!is_readable($this->path)) {
             throw new \RuntimeException(sprintf('%s file is not readable', $this->path));
