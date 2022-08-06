@@ -118,6 +118,12 @@ class MediumApi
 
     }
 
+    /* ********************************************************* */
+    /* Articles */
+    /* ********************************************************* */
+
+    /* Getting a user's articles, their info, and their contents */
+
     public function getUserArticlesIds()
     {
         $url = "https://medium2.p.rapidapi.com/user/" . $this->user_id . "/articles";
@@ -167,7 +173,6 @@ class MediumApi
                 "content" => $content,
             ];
 
-            break;
         }
 
     }
@@ -203,7 +208,6 @@ class MediumApi
                 "markdown" => $markdown,
             ];
 
-            break;
         }
 
     }
@@ -235,7 +239,6 @@ class MediumApi
                 "info" => $info,
             ];
 
-            break;
         }
 
     }
@@ -260,10 +263,13 @@ class MediumApi
                 "content" => $content
             ];
 
-            break;
         }
 
     }
+
+    /* ********************************************************* */
+    /* Articles */
+    /* ********************************************************* */
 
     public function showUserArticles()
     {

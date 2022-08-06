@@ -25,8 +25,8 @@ $api = new MediumApi();
 
 // $api->getUserArticlesInfos();
 
-$api->getUserArticles();
+//$api->getUserArticles();
 
-var_dump($api);
+//var_dump($api);
 
 ?>
