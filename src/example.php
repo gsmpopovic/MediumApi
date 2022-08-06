@@ -1,13 +1,13 @@
 <?php 
 
-require_once "./NishuJainMediumApi/NishuJainMediumApi.php";
-require_once "./NishuJainMediumApi/Env.php";
+require_once "NishuJainMediumApi/NishuJainMediumApi.php";
+require_once "NishuJainMediumApi/Env.php";
 
 use src\NishuJainMediumApi\NishuJainMediumApi;
 use src\NishuJainMediumApi\Env;
 
 
-$path = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . ".env";
+$path = dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . ".env";
 
 $env = new Env($path);
 
