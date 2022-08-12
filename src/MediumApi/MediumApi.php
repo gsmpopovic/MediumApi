@@ -4,8 +4,11 @@ namespace src\MediumApi;
 
 // https://rapidapi.com/nishujain199719-vgIfuFHZxVZ/api/medium2/
 
+use src\MediumApi\Request;
+ 
 class MediumApi
 {
+
 
     public $api_key = "";
 
@@ -24,6 +27,8 @@ class MediumApi
     public $associated_articles_contents = [];
 
     public $associated_articles_markdowns = [];
+
+    public $request = null; 
 
     public $response = null;
 
@@ -91,7 +96,7 @@ class MediumApi
 
             $this->err = $err;
 
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
 
             echo "Error: " . $e->getMessage();
 
