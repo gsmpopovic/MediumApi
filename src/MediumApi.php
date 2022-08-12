@@ -1,10 +1,10 @@
 <?php
 
-namespace src\MediumApi;
+namespace gsmpopovic\MediumApi;
 
 // https://rapidapi.com/nishujain199719-vgIfuFHZxVZ/api/medium2/
 
-use src\MediumApi\Request;
+use gsmpopovic\MediumApi\Request;
 
 class MediumApi
 {

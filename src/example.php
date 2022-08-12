@@ -1,11 +1,11 @@
 <?php 
 
-require_once "MediumApi/MediumApi.php";
-require_once "MediumApi/Env.php";
-require_once "MediumApi/Request.php";
+require_once "MediumApi.php";
+require_once "Env.php";
+require_once "Request.php";
 
-use src\MediumApi\MediumApi;
-use src\MediumApi\Env;
+use gsmpopovic\MediumApi\MediumApi;
+use gsmpopovic\MediumApi\Env;
 
 
 $path = dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . ".env";

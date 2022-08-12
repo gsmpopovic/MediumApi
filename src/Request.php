@@ -1,6 +1,6 @@
 <?php
 
-namespace src\MediumApi;
+namespace gsmpopovic\MediumApi;
 
 class Request
 {
