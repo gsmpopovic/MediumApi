@@ -3,7 +3,7 @@
     "description": "A simple package to interact with a 3rd-party Medium API.",
     "type": "library",
     "license": "MIT",
-    "version" : "1.0.0", 
+    "version": "1.0.0",
     "authors": [
         {
             "name": "George Popovic",
@@ -12,8 +12,11 @@
     ],
     "minimum-stability": "dev",
     "autoload": {
-        "psr-4": {"gsmpopovic\\MediumApi\\": "src/"}
+        "psr-4": {
+            "gsmpopovic\\MediumApi\\": "src/"
+        }
     },
-    "require": {}
+    "require": {
+        "php": ">=7.4"
+    }
 }
-
