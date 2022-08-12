@@ -5,13 +5,7 @@ namespace src\MediumApi;
 class Request
 {
 
-    public $url = "";
-
-    public $api_key = "";
-
-    public $api_host = "";
-
-    public $user_name = "";
+    public $url = null;
 
     public $response = null;
 
@@ -21,7 +15,7 @@ class Request
 
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_ENCODING => "",
+        CURLOPT_ENCODING => null,
         CURLOPT_MAXREDIRS => 10,
         CURLOPT_TIMEOUT => 30,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -35,16 +29,24 @@ class Request
 
         $this->init();
 
-        $this->api_key = getenv("MEDIUM_API_KEY");
-        $this->api_host = getenv("MEDIUM_API_HOST");
-        $this->user_name = getenv("MEDIUM_USER_NAME");
+    }
+
+    /*
+    @return void
+    */
+    public function init()
+    {
+
+        $curl = curl_init();
+
+        $this->curl = $curl;
 
     }
 
     public function setOptions($options = [])
     {
 
-        if (isset($options)) {
+        if (isset($options) && !empty($options)) {
 
             $this->options = $options;
 
@@ -55,16 +57,9 @@ class Request
     public function setHeaders($headers = [])
     {
 
-        if (isset($headers)) {
+        if (isset($headers) && !empty($headers)) {
 
             $this->headers = $headers;
-
-        } else {
-
-            $this->headers = [
-                "X-RapidAPI-Host: " . $this->api_host,
-                "X-RapidAPI-Key: " . $this->api_key,
-            ];
 
         }
 
@@ -72,7 +67,7 @@ class Request
 
     }
 
-    public function setURL($url = "")
+    public function setURL($url = null)
     {
 
         if (isset($url)) {
@@ -81,7 +76,7 @@ class Request
 
         } else {
 
-            $this->url = "";
+            $this->url = null;
 
         }
 
@@ -89,7 +84,7 @@ class Request
 
     }
 
-    public function setHttpVerb($verb = "")
+    public function setHttpVerb($verb = null)
     {
 
         if (isset($verb)) {
@@ -106,16 +101,19 @@ class Request
 
     }
 
-    public function init()
-    {
+    /*
 
-        $curl = curl_init();
+    @param string $url
 
-        $this->curl = $curl;
+    @param array $options
 
-    }
+    @param array $headers
 
-    public function get($url = "", $options = [], $headers = [])
+    @return void
+
+    */
+
+    public function get($url = null, $options = [], $headers = [])
     {
 
         try {
@@ -132,7 +130,7 @@ class Request
 
     }
 
-    public function post($url = "", $options = [], $headers = [])
+    public function post($url = null, $options = [], $headers = [])
     {
 
 
@@ -150,7 +148,7 @@ class Request
 
     }
 
-    public function build($url = "", $options = [], $headers = [], $verb = "")
+    public function build($url = null, $options = [], $headers = [], $verb = null)
     {
 
         $this->setOptions($options);
