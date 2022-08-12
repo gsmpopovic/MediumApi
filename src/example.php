@@ -2,6 +2,7 @@
 
 require_once "MediumApi/MediumApi.php";
 require_once "MediumApi/Env.php";
+require_once "MediumApi/Request.php";
 
 use src\MediumApi\MediumApi;
 use src\MediumApi\Env;
@@ -15,7 +16,7 @@ $env->load();
 
 $api = new MediumApi();
 
-// $api->getUserId();
+$api->getUserId();
 
 // $api->getUserArticlesIds();
 
@@ -27,6 +28,6 @@ $api = new MediumApi();
 
 //$api->getUserArticles();
 
-//var_dump($api);
+var_dump($api);
 
 ?>
