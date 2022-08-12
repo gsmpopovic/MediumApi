@@ -10,9 +10,9 @@ class MediumApi
 {
 
 
-    public $api_key = null;
+    public $rapid_api_medium_api_key = null;
 
-    public $api_host = null;
+    public $rapid_api_medium_api_host = null;
 
     public $user_name = null;
 
@@ -37,20 +37,23 @@ class MediumApi
     public function __construct()
     {
 
-        $api_key = getenv("MEDIUM_API_KEY");
-        $api_host = getenv("MEDIUM_API_HOST");
+        $this->rapid_api_medium_api_key = getenv("RAPID_API_MEDIUM_API_KEY");
+        $this->rapid_api_medium_api_host = getenv("RAPID_API_MEDIUM_API_HOST");
+        $this->user_name = getenv("MEDIUM_USER_NAME");
 
         $this->request = new Request();
 
-        $this->request->headers = [
-            "X-RapidAPI-Host: " . $api_host,
-            "X-RapidAPI-Key: " . $api_key,
-        ];
-        
-        $this->user_name = getenv("MEDIUM_USER_NAME");
-
     }
 
+    /* Set the HTTP headers that authorize whether we can access the 3rd party API on Rapid API. */
+    public function setRapidApiHeaders(){
+
+        $this->request->headers["X-RapidAPI-Host: "] = $this->rapid_api_medium_api_host;
+        $this->request->headers["X-RapidAPI-Key: "] = $this->rapid_api_medium_api_key;
+    
+    }
+
+    /* Get the user's ID associated with their username. */
     public function getUserId()
     {
 
@@ -69,11 +72,10 @@ class MediumApi
     }
 
     /* ********************************************************* */
-    /* Articles */
+    /* Functions related to etrieving Articles */
     /* ********************************************************* */
 
     /* Getting a user's articles, their info, and their contents */
-
     public function getUserArticlesIds()
     {
         $url = "https://medium2.p.rapidapi.com/user/" . $this->user_id . "/articles";
@@ -90,6 +92,7 @@ class MediumApi
 
     }
 
+    /* Get the content (non-html/non-markdown) for a particular article. */
     public function getUserArticleContent($associated_article_id)
     {
 
@@ -107,6 +110,7 @@ class MediumApi
 
     }
 
+    /* Get the content (non-html/non-markdown) for all user's articles associated with our object. */
     public function getUserArticlesContents()
     {
 
@@ -123,6 +127,7 @@ class MediumApi
 
     }
 
+    /* Get the content (markdown) for a particular article. */
     public function getUserArticleMarkdown($associated_article_id)
     {
 
@@ -140,6 +145,7 @@ class MediumApi
 
     }
 
+    /* Get the content (markdown) for all user's articles associated with our object. */
     public function getUserArticlesMarkdowns()
     {
 
@@ -156,6 +162,7 @@ class MediumApi
 
     }
 
+    /* Get the info/metadata for a particular article. */
     public function getUserArticleInfo($associated_article_id)
     {
 
@@ -169,6 +176,7 @@ class MediumApi
 
     }
 
+    /* Get the info/metadata for all user's articles associated with our object. */
     public function getUserArticlesInfos()
     {
 
@@ -185,6 +193,9 @@ class MediumApi
 
     }
 
+    /* Get the content, markdown, and metadata for all of our user's article associated with our object,
+    and file it away nicely, in memory. 
+    */
     public function getUserArticles()
     {
 
@@ -210,9 +221,10 @@ class MediumApi
     }
 
     /* ********************************************************* */
-    /* Articles */
+    /* Functions related to etrieving Articles */
     /* ********************************************************* */
 
+    /* DUmp user's articles for debugging purposes. */
     public function showUserArticles()
     {
         var_dump($this->associated_articles);
