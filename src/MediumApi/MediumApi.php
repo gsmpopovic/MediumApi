@@ -42,14 +42,22 @@ class MediumApi
         $this->user_name = getenv("MEDIUM_USER_NAME");
 
         $this->request = new Request();
+        $this->setRapidApiHeaders();
 
     }
 
     /* Set the HTTP headers that authorize whether we can access the 3rd party API on Rapid API. */
     public function setRapidApiHeaders(){
 
-        $this->request->headers["X-RapidAPI-Host: "] = $this->rapid_api_medium_api_host;
-        $this->request->headers["X-RapidAPI-Key: "] = $this->rapid_api_medium_api_key;
+        $this->request->headers["X-RapidAPI-Host"] = "X-RapidAPI-Host: " . $this->rapid_api_medium_api_host;
+        $this->request->headers["X-RapidAPI-Key"] = "X-RapidAPI-Key: " . $this->rapid_api_medium_api_key;
+    
+    }
+    /* Erase the HTTP headers that authorize whether we can access the 3rd party API on Rapid API. */
+    public function unsetRapidApiHeaders(){
+
+        unset($this->request->headers["X-RapidAPI-Host"]);
+        unset($this->request->headers["X-RapidAPI-Key"]);
     
     }
 
