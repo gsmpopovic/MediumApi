@@ -3,7 +3,6 @@
     "description": "A simple package to interact with a 3rd-party Medium API.",
     "type": "library",
     "license": "MIT",
-    "version": "1.0.0",
     "authors": [
         {
             "name": "George Popovic",
