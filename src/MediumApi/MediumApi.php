@@ -5,16 +5,16 @@ namespace src\MediumApi;
 // https://rapidapi.com/nishujain199719-vgIfuFHZxVZ/api/medium2/
 
 use src\MediumApi\Request;
- 
+
 class MediumApi
 {
 
 
-    public $api_key = "";
+    public $api_key = null;
 
-    public $api_host = "";
+    public $api_host = null;
 
-    public $user_name = "";
+    public $user_name = null;
 
     public $user_id = null;
 
@@ -37,70 +37,17 @@ class MediumApi
     public function __construct()
     {
 
-        $this->api_key = getenv("MEDIUM_API_KEY");
-        $this->api_host = getenv("MEDIUM_API_HOST");
+        $api_key = getenv("MEDIUM_API_KEY");
+        $api_host = getenv("MEDIUM_API_HOST");
+
+        $this->request = new Request();
+
+        $this->request->headers = [
+            "X-RapidAPI-Host: " . $api_host,
+            "X-RapidAPI-Key: " . $api_key,
+        ];
+        
         $this->user_name = getenv("MEDIUM_USER_NAME");
-
-    }
-
-    public function request($args)
-    {
-
-        try {
-
-            $url = $args["url"];
-
-            $return_transfer = isset($args["return_transfer"]) ? $args["return_transfer"] : true;
-
-            $follow_location = isset($args["follow_location"]) ? $args["follow_location"] : true;
-
-            $encoding = isset($args["encoding"]) ? $args["encoding"] : "";
-
-            $http_verb = isset($args["http_verb"]) ? $args["http_verb"] : "GET";
-
-            $http_version = isset($args["http_version"]) ? $args["http_version"] : CURL_HTTP_VERSION_1_1;
-
-            $max_redirects = isset($args["max_redirects"]) ? $args["max_redirects"] : 10;
-
-            $timeout = isset($args["timeout"]) ? $args["timeout"] : 30;
-
-            $http_version = isset($args["http_version"]) ? $args["http_version"] : CURL_HTTP_VERSION_1_1;
-
-            $headers = isset($args["headers"]) ? $args["headers"] :
-            [
-                "X-RapidAPI-Host: " . $this->api_host,
-                "X-RapidAPI-Key: " . $this->api_key,
-            ];
-
-            $curl = curl_init();
-
-            curl_setopt_array($curl, [
-                CURLOPT_URL => "$url",
-                CURLOPT_RETURNTRANSFER => $return_transfer,
-                CURLOPT_FOLLOWLOCATION => $follow_location,
-                CURLOPT_ENCODING => "$encoding",
-                CURLOPT_MAXREDIRS => $max_redirects,
-                CURLOPT_TIMEOUT => $timeout,
-                CURLOPT_HTTP_VERSION => $http_version,
-                CURLOPT_CUSTOMREQUEST => "$http_verb",
-                CURLOPT_HTTPHEADER => $headers,
-            ]);
-
-            $response = curl_exec($curl);
-
-            $err = curl_error($curl);
-
-            curl_close($curl);
-
-            $this->response = $response;
-
-            $this->err = $err;
-
-        } catch (\Exception $e) {
-
-            echo "Error: " . $e->getMessage();
-
-        }
 
     }
 
@@ -109,11 +56,9 @@ class MediumApi
 
         $url = "https://medium2.p.rapidapi.com/user/id_for/" . $this->user_name;
 
-        $params["url"] = $url;
+        $this->request->get($url);
 
-        $this->request($params);
-
-        $api_response = json_decode($this->response, true);
+        $api_response = json_decode($this->request->response, true);
 
         if (isset($api_response["id"])) {
 
@@ -133,11 +78,9 @@ class MediumApi
     {
         $url = "https://medium2.p.rapidapi.com/user/" . $this->user_id . "/articles";
 
-        $params["url"] = $url;
+        $this->request->get($url);
 
-        $this->request($params);
-
-        $api_response = json_decode($this->response, true);
+        $api_response = json_decode($this->request->response, true);
 
         if (isset($api_response["associated_articles"])) {
 
@@ -152,11 +95,9 @@ class MediumApi
 
         $url = "https://medium2.p.rapidapi.com/article/" . $associated_article_id . "/content";
 
-        $params["url"] = $url;
+        $this->request->get($url);
 
-        $this->request($params);
-
-        $api_response = json_decode($this->response, true);
+        $api_response = json_decode($this->request->response, true);
 
         if (isset($api_response["content"])) {
 
@@ -187,11 +128,9 @@ class MediumApi
 
         $url = "https://medium2.p.rapidapi.com/article/" . $associated_article_id . "/markdown";
 
-        $params["url"] = $url;
+        $this->request->get($url);
 
-        $this->request($params);
-
-        $api_response = json_decode($this->response, true);
+        $api_response = json_decode($this->request->response, true);
 
         if (isset($api_response["markdown"])) {
 
@@ -222,11 +161,9 @@ class MediumApi
 
         $url = "https://medium2.p.rapidapi.com/article/" . $associated_article_id;
 
-        $params["url"] = $url;
+        $this->request->get($url);
 
-        $this->request($params);
-
-        $api_response = json_decode($this->response, true);
+        $api_response = json_decode($this->request->response, true);
 
         return $api_response;
 
