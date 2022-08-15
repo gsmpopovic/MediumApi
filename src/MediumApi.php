@@ -267,6 +267,12 @@ class MediumApi
     /* Functions related to creating a post. */
     /* ********************************************************* */
 
+    /* Upload an image */
+
+    public function uploadImage(){
+        // https://github.com/Medium/medium-api-docs#uploading-an-image
+    }
+
     /* ********************************************************* */
     /* Medium Official API functions */
     /* ********************************************************* */
