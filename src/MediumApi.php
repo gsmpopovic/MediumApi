@@ -10,23 +10,37 @@ class MediumApi
 {
 
 
-    public $rapid_api_medium_api_key = null;
+    /* Official API properties */
 
-    public $rapid_api_medium_api_host = null;
+        public $official_medium_api_access_token = null; 
 
-    public $user_name = null;
+        public $version = "v1";
 
-    public $user_id = null;
+        public $user = [];
 
-    public $associated_articles = [];
+    /* Official API properties */
 
-    public $associated_articles_ids = [];
+    /* 3rd-party API properties */
 
-    public $associated_articles_infos = [];
+        public $rapid_api_medium_api_key = null;
 
-    public $associated_articles_contents = [];
+        public $rapid_api_medium_api_host = null;
 
-    public $associated_articles_markdowns = [];
+        public $user_name = null;
+
+        public $user_id = null;
+
+        public $associated_articles = [];
+
+        public $associated_articles_ids = [];
+
+        public $associated_articles_infos = [];
+
+        public $associated_articles_contents = [];
+
+        public $associated_articles_markdowns = [];
+
+    /* 3rd-party API properties */
 
     public $request = null; 
 
@@ -35,13 +49,66 @@ class MediumApi
 
         $this->rapid_api_medium_api_key = getenv("RAPID_API_MEDIUM_API_KEY");
         $this->rapid_api_medium_api_host = getenv("RAPID_API_MEDIUM_API_HOST");
+        $this->official_medium_api_access_token = getenv("OFFICIAL_MEDIUM_API_ACCESS_TOKEN");
         $this->user_name = getenv("MEDIUM_USER_NAME");
 
         $this->request = new Request();
-        $this->setRapidApiHeaders();
 
     }
 
+    /* ********************************************************* */
+    /* Medium Official API functions */
+    /* ********************************************************* */
+
+        /* Set the HTTP headers used to interact with / access the official Medium API. */
+        public function setMediumApiHeaders(){
+
+            $this->setMediumApiAuthHeaders();
+
+            $this->request->headers["Content-Type"] = "application/json";
+            $this->request->headers["Accept-Charset"] = "utf-8";
+            $this->request->headers["Accept"] = "application/json";
+
+        }
+
+        /* Set the HTTP headers that authorize whether we can access the official Medium API. */
+        public function setMediumApiAuthHeaders(){
+
+            $this->request->headers["Authorization"] = "Authorization: Bearer " . $this->official_medium_api_access_token;
+            $this->request->headers["Host"] = "api.medium.com";
+        
+        }
+
+                /* Get an object representing the user authorized to access the API. */
+                public function getUser()
+                {
+        
+                    $url = "https://api.medium.com/$this->version/me";
+        
+                    $this->setMediumApiHeaders();
+
+                    $this->request->get($url);
+        
+                    $api_response = json_decode($this->request->response, true);
+        
+                    if(isset($api_response["data"]) && !empty($api_response["data"])){
+                        
+                        $this->user = $api_response["data"];
+
+                    } else {
+
+                        // Access token probably isn't set. 
+
+                        // string(67) "{"errors":[{"message":"An access token is required.","code":6000}]}"
+
+                    }
+
+        
+                }
+
+    /* ********************************************************* */
+    /* Medium Official API functions */
+    /* ********************************************************* */
 
     /* ********************************************************* */
     /* Medium Rapid API functions */
@@ -54,6 +121,7 @@ class MediumApi
             $this->request->headers["X-RapidAPI-Key"] = "X-RapidAPI-Key: " . $this->rapid_api_medium_api_key;
         
         }
+
         /* Erase the HTTP headers that authorize whether we can access the 3rd party API on Rapid API. */
         public function unsetRapidApiHeaders(){
 
@@ -236,11 +304,5 @@ class MediumApi
     /* ********************************************************* */
     /* Medium Rapid API functions */
     /* ********************************************************* */
-    
-    /* DUmp user's articles for debugging purposes. */
-    public function showUserArticles()
-    {
-        var_dump($this->associated_articles);
-    }
 
 }

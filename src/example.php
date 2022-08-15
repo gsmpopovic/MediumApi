@@ -16,7 +16,7 @@ $env->load();
 
 $api = new MediumApi();
 
-$api->getUserId();
+//$api->getUserId();
 
 // $api->getUserArticlesIds();
 
@@ -27,6 +27,8 @@ $api->getUserId();
 // $api->getUserArticlesInfos();
 
 //$api->getUserArticles();
+
+//$api->getUser();
 
 var_dump($api);
 
