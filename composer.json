@@ -1,6 +1,6 @@
 {
     "name": "gsmpopovic/medium-api",
-    "description": "A simple package to interact with a 3rd-party Medium API.",
+    "description": "A simple PHP SDK to interact with the Medium API, through the official API, and a 3rd-party",
     "type": "library",
     "license": "MIT",
     "authors": [
