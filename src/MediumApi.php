@@ -65,9 +65,9 @@ class MediumApi
 
             $this->setMediumApiAuthHeaders();
 
-            $this->request->headers["Content-Type"] = "application/json";
-            $this->request->headers["Accept-Charset"] = "utf-8";
-            $this->request->headers["Accept"] = "application/json";
+            $this->request->headers["Content-Type"] = "Content-Type: application/json";
+            $this->request->headers["Accept-Charset"] = "Accept-Charset: utf-8";
+            $this->request->headers["Accept"] = "Accept: application/json";
 
         }
 
@@ -75,7 +75,16 @@ class MediumApi
         public function setMediumApiAuthHeaders(){
 
             $this->request->headers["Authorization"] = "Authorization: Bearer " . $this->official_medium_api_access_token;
-            $this->request->headers["Host"] = "api.medium.com";
+            $this->request->headers["Host"] = "Host: api.medium.com";
+        
+        }
+
+
+        /* Unset the HTTP headers that authorize whether we can access the official Medium API. */
+        public function unsetMediumApiAuthHeaders(){
+
+            unset($this->request->headers["Authorization"]);
+            unset($this->request->headers["Host"]);
         
         }
 
