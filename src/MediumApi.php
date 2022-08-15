@@ -20,7 +20,9 @@ class MediumApi
 
     /* Official API properties */
 
-    /* 3rd-party API properties */
+    /* ********************************************************* */
+
+    /* 3rd-party API (Rapid API) properties */
 
         public $rapid_api_medium_api_key = null;
 
@@ -44,15 +46,36 @@ class MediumApi
 
     public $request = null; 
 
-    public function __construct()
+    public function __construct($using_medium_rapid_api=false, $using_official_medium_api=true)
     {
 
-        $this->rapid_api_medium_api_key = getenv("RAPID_API_MEDIUM_API_KEY");
-        $this->rapid_api_medium_api_host = getenv("RAPID_API_MEDIUM_API_HOST");
-        $this->official_medium_api_access_token = getenv("OFFICIAL_MEDIUM_API_ACCESS_TOKEN");
-        $this->user_name = getenv("MEDIUM_USER_NAME");
-
+        $this->using_medium_rapid_api = $using_medium_rapid_api;
+        $this->using_official_medium_api = $using_official_medium_api;
+        
         $this->request = new Request();
+
+        $this->setup();
+
+    }
+
+    public function setup(){
+
+        if($this->using_medium_rapid_api === true){
+        
+            $this->rapid_api_medium_api_key = getenv("RAPID_API_MEDIUM_API_KEY");
+            $this->rapid_api_medium_api_host = getenv("RAPID_API_MEDIUM_API_HOST");
+            $this->user_name = getenv("MEDIUM_USER_NAME");
+
+            $this->setRapidApiHeaders();
+        
+        }
+
+        if($this->using_official_medium_api === true){
+
+            $this->official_medium_api_access_token = getenv("OFFICIAL_MEDIUM_API_ACCESS_TOKEN");
+            $this->setMediumApiHeaders();
+
+        }
 
     }
 
@@ -88,37 +111,47 @@ class MediumApi
         
         }
 
-                /* Get an object representing the user authorized to access the API. */
-                public function getUser()
-                {
+        /* ********************************************************* */
+        /* Functions related to etrieving Medium API user */
+        /* ********************************************************* */        
         
-                    $url = "https://api.medium.com/$this->version/me";
-        
-                    $this->setMediumApiHeaders();
+        /* Get an object representing the user authorized to access the API. */
+        public function getUser()
+        {
 
-                    $this->request->get($url);
-        
-                    $api_response = json_decode($this->request->response, true);
-        
-                    if(isset($api_response["data"]) && !empty($api_response["data"])){
-                        
-                        $this->user = $api_response["data"];
+            $url = "https://api.medium.com/$this->version/me";
 
-                    } else {
+            $this->request->get($url);
 
-                        // Access token probably isn't set. 
+            $api_response = json_decode($this->request->response, true);
 
-                        // string(67) "{"errors":[{"message":"An access token is required.","code":6000}]}"
+            if(isset($api_response["data"]) && !empty($api_response["data"])){
+                
+                $this->user = $api_response["data"];
 
-                    }
+            } else {
 
-        
-                }
+                // Access token probably isn't set. 
+
+                // string(67) "{"errors":[{"message":"An access token is required.","code":6000}]}"
+
+            }
+
+
+        }
+        /* ********************************************************* */
+        /* Functions related to etrieving Medium API user */
+        /* ********************************************************* */ 
+
 
     /* ********************************************************* */
     /* Medium Official API functions */
     /* ********************************************************* */
 
+
+    /* ********************************************************* */
+
+    
     /* ********************************************************* */
     /* Medium Rapid API functions */
     /* ********************************************************* */
