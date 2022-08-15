@@ -30,6 +30,19 @@ $api = new MediumApi();
 
 $api->getUser();
 
-var_dump($api);
+$api->getUserPublications();
+
+    $post = [
+    "title"=> "Liverpool FC",
+    "contentFormat"=> "html",
+    "content"=> "<h1>Liverpool FC</h1><p>You’ll never walk alone.</p>",
+    "canonicalUrl"=> "http://jamietalbot.com/posts/liverpool-fc",
+    "tags"=> ["football", "sport", "Liverpool"],
+    "publishStatus"=> "draft"];
+  
+
+$api->createUserPost($post);
+
+var_dump($api->request->response);
 
 ?>

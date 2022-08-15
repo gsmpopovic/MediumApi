@@ -130,13 +130,15 @@ class Request
 
     }
 
-    public function post($url = null, $options = [], $headers = [])
+    public function post($url = null, $post = [], $options = [], $headers = [])
     {
 
 
         try {
 
             $this->build($url, $options, $headers, strtoupper(__FUNCTION__));
+
+            $this->setPostFields($post);
 
             $this->exec();
 
@@ -147,6 +149,15 @@ class Request
         }
 
     }
+
+    public function setPostFields($post = []){
+
+        $post_fields = json_encode($post);
+
+        curl_setopt($this->curl, CURLOPT_POSTFIELDS, $post_fields);
+
+    }
+
 
     public function build($url = null, $options = [], $headers = [], $verb = null)
     {

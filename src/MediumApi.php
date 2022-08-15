@@ -139,6 +139,85 @@ class MediumApi
 
 
         }
+
+        /* Get an object representing a user's publications. */
+        public function getUserPublications(){
+
+            if(isset($this->user['id'])){
+                
+                $user_id = $this->user['id'];
+
+                $url = "https://api.medium.com/$this->version/users/$user_id/publications";
+
+                $this->request->get($url);
+    
+                $api_response = json_decode($this->request->response, true);
+    
+                if(isset($api_response["data"]) && !empty($api_response["data"])){
+                    
+                    $this->publications = $api_response["data"];
+    
+                } else {
+    
+                    // Access token probably isn't set. 
+    
+                    // string(67) "{"errors":[{"message":"An access token is required.","code":6000}]}"
+    
+                    // OR
+    
+                    // Trying to access publications for another user (403)
+    
+                }
+
+            } else {
+            
+                echo "User ID isn't set.";
+
+            }
+
+        }
+
+        /* Create a post for a user. */
+        public function createUserPost($post = []){
+            // https://github.com/Medium/medium-api-docs#creating-a-post
+            
+            if(isset($this->user['id'])){
+                
+                $user_id = $this->user['id'];
+
+                $url = "https://api.medium.com/$this->version/users/$user_id/posts";
+
+                $this->request->post($url, $post);
+    
+                $api_response = json_decode($this->request->response, true);
+    
+                if(isset($api_response["data"]) && !empty($api_response["data"])){
+
+                    echo "\nPost ID #" . $api_response["data"]["id"] . " was successfully created.\n";
+    
+                } else {
+    
+                    // Access token probably isn't set. 
+    
+                    // string(67) "{"errors":[{"message":"An access token is required.","code":6000}]}"
+    
+                    // OR
+    
+                    // Post fields probably malformed. 
+    
+                }
+
+            } else {
+            
+                echo "User ID isn't set.";
+
+            }
+
+        }
+        
+
+
+
         /* ********************************************************* */
         /* Functions related to etrieving Medium API user */
         /* ********************************************************* */ 
