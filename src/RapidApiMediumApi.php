@@ -25,6 +25,10 @@ class RapidApiMediumApi
 
     public $associated_articles_markdowns = [];
 
+    public $base_uri = null;
+
+    public $endpoint = null;
+    
     public $request = null;
 
     public function __construct($request)

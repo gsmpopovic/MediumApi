@@ -11,6 +11,10 @@ class MediumApi
 
     public $user = [];
 
+    public $base_uri = null;
+
+    public $endpoint = null;
+    
     public $request = null;
 
     public function __construct($request)
