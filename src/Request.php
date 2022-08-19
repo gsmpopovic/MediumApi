@@ -10,7 +10,7 @@ class Request
     public $base_uri = null; 
 
     public $endpoint = null; 
-    
+
     public $url = null;
 
     public $response = null;
@@ -29,6 +29,14 @@ class Request
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 
     ];
+
+    public $content_types = [
+        "multipart/form-data",
+        "application/x-www-form-urlencoded",
+        "application/json"
+    ];
+
+    public $content_type = "application/json";
 
     public $curl = null;
 
@@ -69,6 +77,16 @@ class Request
         }
 
         $this->options[CURLOPT_HTTPHEADER] = $this->headers;
+
+    }
+
+    public function setType($type = null){
+
+        if(isset($type) && in_array($type, $this->content_types)){
+
+            $this->options[CURLOPT_HTTPHEADER]["Content-Type"] = "Content-Type: $type";
+
+        }
 
     }
 
