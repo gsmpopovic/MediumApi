@@ -228,9 +228,13 @@ class Request
     public function setPostFields($post = [])
     {
 
-        $post_fields = json_encode($post);
+        if(isset($post) && !empty($post)){
 
-        curl_setopt($this->curl, CURLOPT_POSTFIELDS, $post_fields);
+            $post_fields = json_encode($post);
+
+            curl_setopt($this->curl, CURLOPT_POSTFIELDS, $post_fields);
+        
+        }
 
     }
 
