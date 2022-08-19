@@ -102,6 +102,25 @@ class Request
 
     }
 
+    public function delete($url = null, $options = [], $headers = [])
+    {
+
+        try {
+
+            $this->build($url, $options, $headers, strtoupper(__FUNCTION__));
+
+            $this->exec();
+
+        } catch (\Exception $e) {
+
+            $this->exception = $e;
+
+            echo "Error when building and sending request: " . $e->getMessage();
+
+        }
+
+    }
+
     public function get($url = null, $options = [], $headers = [])
     {
 
