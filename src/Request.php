@@ -5,7 +5,7 @@ namespace gsmpopovic\MediumApi;
 class Request
 {
 
-    /* A cURL wrapper with GET and POST functionality. */
+    /* A cURL wrapper. */
 
     public $url = null;
 
