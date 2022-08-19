@@ -7,6 +7,10 @@ class Request
 
     /* A cURL wrapper. */
 
+    public $base_uri = null; 
+
+    public $endpoint = null; 
+    
     public $url = null;
 
     public $response = null;
@@ -239,7 +243,7 @@ class Request
         } catch (\Exception $e) {
 
             $this->exception = $e;
-            
+
             echo "Error when executing request: " . $e->getMessage();
 
         } finally {
