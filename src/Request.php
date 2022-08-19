@@ -140,6 +140,50 @@ class Request
 
     }
 
+    public function patch($url = null, $post = [], $options = [], $headers = [])
+    {
+
+
+        try {
+
+            $this->build($url, $options, $headers, strtoupper(__FUNCTION__));
+
+            $this->setPostFields($post);
+
+            $this->exec();
+
+        } catch (\Exception $e) {
+
+            $this->exception = $e;
+
+            echo "Error when building and sending request: " . $e->getMessage();
+
+        }
+
+    }
+
+    public function put($url = null, $post = [], $options = [], $headers = [])
+    {
+
+
+        try {
+
+            $this->build($url, $options, $headers, strtoupper(__FUNCTION__));
+
+            $this->setPostFields($post);
+
+            $this->exec();
+
+        } catch (\Exception $e) {
+
+            $this->exception = $e;
+
+            echo "Error when building and sending request: " . $e->getMessage();
+
+        }
+
+    }
+
     public function post($url = null, $post = [], $options = [], $headers = [])
     {
 
