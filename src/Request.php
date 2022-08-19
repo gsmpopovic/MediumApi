@@ -11,7 +11,7 @@ class Request
 
     public $response = null;
 
-    public $exception = null; 
+    public $exception = null;
 
     public $err = null;
 
@@ -111,7 +111,7 @@ class Request
 
             $this->exec();
 
-        } catch (\Exception $e) {
+        } catch (\Exception$e) {
 
             $this->exception = $e;
 
@@ -130,7 +130,7 @@ class Request
 
             $this->exec();
 
-        } catch (\Exception $e) {
+        } catch (\Exception$e) {
 
             $this->exception = $e;
 
@@ -143,7 +143,6 @@ class Request
     public function patch($url = null, $post = [], $options = [], $headers = [])
     {
 
-
         try {
 
             $this->build($url, $options, $headers, strtoupper(__FUNCTION__));
@@ -152,7 +151,7 @@ class Request
 
             $this->exec();
 
-        } catch (\Exception $e) {
+        } catch (\Exception$e) {
 
             $this->exception = $e;
 
@@ -165,7 +164,6 @@ class Request
     public function put($url = null, $post = [], $options = [], $headers = [])
     {
 
-
         try {
 
             $this->build($url, $options, $headers, strtoupper(__FUNCTION__));
@@ -174,7 +172,7 @@ class Request
 
             $this->exec();
 
-        } catch (\Exception $e) {
+        } catch (\Exception$e) {
 
             $this->exception = $e;
 
@@ -187,7 +185,6 @@ class Request
     public function post($url = null, $post = [], $options = [], $headers = [])
     {
 
-
         try {
 
             $this->build($url, $options, $headers, strtoupper(__FUNCTION__));
@@ -196,7 +193,7 @@ class Request
 
             $this->exec();
 
-        } catch (\Exception $e) {
+        } catch (\Exception$e) {
 
             $this->exception = $e;
 
@@ -206,14 +203,14 @@ class Request
 
     }
 
-    public function setPostFields($post = []){
+    public function setPostFields($post = [])
+    {
 
         $post_fields = json_encode($post);
 
         curl_setopt($this->curl, CURLOPT_POSTFIELDS, $post_fields);
 
     }
-
 
     public function build($url = null, $options = [], $headers = [], $verb = null)
     {
@@ -239,7 +236,7 @@ class Request
 
             $this->err = curl_error($this->curl);
 
-        } catch (\Exception $e) {
+        } catch (\Exception$e) {
 
             echo "Error when executing request: " . $e->getMessage();
 
