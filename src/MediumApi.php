@@ -7,7 +7,7 @@ class MediumApi
 
     public $official_medium_api_access_token = null;
 
-    public $version = "v1";
+    public $version = null;
 
     public $user = [];
 
@@ -26,6 +26,8 @@ class MediumApi
     public function setup()
     {
 
+        $this->setVersion();
+
         $this->setEnvVariables();
 
         $this->setMediumApiHeaders();
@@ -36,6 +38,13 @@ class MediumApi
     {
 
         $this->official_medium_api_access_token = getenv("OFFICIAL_MEDIUM_API_ACCESS_TOKEN");
+
+    }
+
+    /* Set the Api version. */
+    public function setVersion($version = null){
+
+        $this->version = $version ?? getenv("OFFICIAL_MEDIUM_API_VERSION"); 
 
     }
 
@@ -187,7 +196,7 @@ class MediumApi
     }
 
     /* Create a post for a user under a publication. */
-    public function createUserPostForPublication($publication_id, $post = [])
+    public function createUserPostForPublication($publication_id = null, $post = [])
     {
         //https://github.com/Medium/medium-api-docs#creating-a-post-under-a-publication
 
