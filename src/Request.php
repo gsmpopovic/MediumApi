@@ -11,6 +11,8 @@ class Request
 
     public $response = null;
 
+    public $exception = null; 
+
     public $err = null;
 
     public $options = [
@@ -111,6 +113,8 @@ class Request
 
         } catch (\Exception $e) {
 
+            $this->exception = $e;
+
             echo "Error when building and sending request: " . $e->getMessage();
 
         }
@@ -130,6 +134,8 @@ class Request
             $this->exec();
 
         } catch (\Exception $e) {
+
+            $this->exception = $e;
 
             echo "Error when building and sending request: " . $e->getMessage();
 
