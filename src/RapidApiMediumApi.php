@@ -1,57 +1,63 @@
-<?php 
+<?php
 
 namespace gsmpopovic\MediumApi;
 
 // https://rapidapi.com/nishujain199719-vgIfuFHZxVZ/api/medium2/
 
-class RapidApiMediumApi {
+class RapidApiMediumApi
+{
 
-        public $rapid_api_medium_api_key = null;
+    public $rapid_api_medium_api_key = null;
 
-        public $rapid_api_medium_api_host = null;
-    
-        public $user_name = null;
-    
-        public $user_id = null;
-    
-        public $associated_articles = [];
-    
-        public $associated_articles_ids = [];
-    
-        public $associated_articles_infos = [];
-    
-        public $associated_articles_contents = [];
-    
-        public $associated_articles_markdowns = [];
-    
-        public $request = null;
+    public $rapid_api_medium_api_host = null;
 
-        public function __construct($request)
-        {
+    public $user_name = null;
 
-            $this->request = $request;
-    
-            $this->setup();
-    
-        }
-    
-        /* Get environment variables and set request headers. */
-        public function setup()
-        {
-    
-                $this->rapid_api_medium_api_key = getenv("RAPID_API_MEDIUM_API_KEY");
-                $this->rapid_api_medium_api_host = getenv("RAPID_API_MEDIUM_API_HOST");
-                $this->user_name = getenv("MEDIUM_USER_NAME");
-    
-                $this->setRapidApiHeaders();
-    
-            
-    
-        }
+    public $user_id = null;
+
+    public $associated_articles = [];
+
+    public $associated_articles_ids = [];
+
+    public $associated_articles_infos = [];
+
+    public $associated_articles_contents = [];
+
+    public $associated_articles_markdowns = [];
+
+    public $request = null;
+
+    public function __construct($request)
+    {
+
+        $this->request = $request;
+
+        $this->setup();
+
+    }
+
+    /* Get environment variables and set request headers. */
+    public function setup()
+    {
+
+        $this->setEnvVariables();
+
+        $this->setRapidApiHeaders();
+
+    }
 
     /* ********************************************************* */
     /* Medium Rapid API functions */
     /* ********************************************************* */
+
+    public function setEnvVariables()
+    {
+
+        $this->rapid_api_medium_api_key = getenv("RAPID_API_MEDIUM_API_KEY");
+        $this->rapid_api_medium_api_host = getenv("RAPID_API_MEDIUM_API_HOST");
+        $this->user_name = getenv("MEDIUM_USER_NAME");
+
+    }
 
     /* Set the HTTP headers that authorize whether we can access the 3rd party API on Rapid API. */
     public function setRapidApiHeaders()

@@ -2,7 +2,6 @@
 
 namespace gsmpopovic\MediumApi;
 
-
 class MediumApi
 {
 
@@ -27,8 +26,16 @@ class MediumApi
     public function setup()
     {
 
-        $this->official_medium_api_access_token = getenv("OFFICIAL_MEDIUM_API_ACCESS_TOKEN");
+        $this->setEnvVariables();
+
         $this->setMediumApiHeaders();
+
+    }
+
+    public function setEnvVariables()
+    {
+
+        $this->official_medium_api_access_token = getenv("OFFICIAL_MEDIUM_API_ACCESS_TOKEN");
 
     }
 
@@ -189,7 +196,7 @@ class MediumApi
             $url = "https://api.medium.com/$this->version/publications/$publication_id/posts";
 
             $this->request->post($url, $post);
-    
+
             $api_response = json_decode($this->request->response, true);
 
             if (isset($api_response["data"]) && !empty($api_response["data"])) {
@@ -222,7 +229,8 @@ class MediumApi
 
     /* Upload an image */
 
-    public function uploadImage(){
+    public function uploadImage()
+    {
         // https://github.com/Medium/medium-api-docs#uploading-an-image
     }
 
