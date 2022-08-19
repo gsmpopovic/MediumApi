@@ -11,3 +11,10 @@ https://packagist.org/packages/gsmpopovic/medium-api
 Install using Composer:
 
 composer require gsmpopovic/medium-api
+
+NB: 
+
+To interact with the official API, you must generate an access token.
+
+All credentials should be set as environment variables, but, barring this, 
+can be manually assigned to the client as properties. 
