@@ -111,7 +111,7 @@ class Request
 
             $this->exec();
 
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
 
             $this->exception = $e;
 
@@ -130,7 +130,7 @@ class Request
 
             $this->exec();
 
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
 
             $this->exception = $e;
 
@@ -151,7 +151,7 @@ class Request
 
             $this->exec();
 
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
 
             $this->exception = $e;
 
@@ -172,7 +172,7 @@ class Request
 
             $this->exec();
 
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
 
             $this->exception = $e;
 
@@ -193,7 +193,7 @@ class Request
 
             $this->exec();
 
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
 
             $this->exception = $e;
 
@@ -236,8 +236,10 @@ class Request
 
             $this->err = curl_error($this->curl);
 
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
 
+            $this->exception = $e;
+            
             echo "Error when executing request: " . $e->getMessage();
 
         } finally {
