@@ -14,7 +14,7 @@ class MediumApi
     public $base_uri = null;
 
     public $endpoint = null;
-    
+
     public $request = null;
 
     public function __construct($request)
@@ -242,9 +242,72 @@ class MediumApi
 
     /* Upload an image */
 
-    public function uploadImage()
+    public function uploadImage($image = null, $filename = null, $type=null)
     {
         // https://github.com/Medium/medium-api-docs#uploading-an-image
+
+        // https://stackoverflow.com/questions/38922677/using-curl-and-php-script-to-upload-an-image-and-text
+
+        // Image types 
+
+        /*
+        image/jpeg
+        image/png
+        image/gif
+        image/tiff
+        */
+
+        if(isset($image) && isset($filename) && isset($type)){
+
+            // ToDo: Make it work. 
+            
+            $chars = md5(rand());
+
+            $boundary = "FormBoundary$chars";
+            
+            $this->request->headers["Content-Type"] = "Content-Type: multipart/form-data; boundary=$boundary";
+
+            /* 
+                --FormBoundaryXYZ
+                Content-Disposition: form-data; name="image"; filename="filename.png"
+                Content-Type: image/png
+
+                IMAGE_DATA
+                --FormBoundaryXYZ--
+            */
+
+            $this->request->headers["Content-Disposition"] = `--$boundary\r\n`;
+            $this->request->headers["Content-Disposition"] .=  `Content-Disposition: form-data; name="image"; filename="$filename"\r\n`;
+            $this->request->headers["Content-Disposition"] .= `Content-Type: $type\r\n`; 
+            $this->request->headers["Content-Disposition"] .=  `$image\r\n`;
+            $this->request->headers["Content-Disposition"] .= `--$boundary--`;
+
+            $url = "https://api.medium.com/$this->version/images";
+
+            $this->request->post($url);
+
+            $api_response = json_decode($this->request->response, true);
+
+            if (isset($api_response["data"]) && !empty($api_response["data"])) {
+
+                $image_url =  $api_response['url'];
+
+                echo "\n Image successfuly uploaded. Url: $image_url";
+
+            } else {
+
+                // Access token probably isn't set.
+
+                // string(67) "{"errors":[{"message":"An access token is required.","code":6000}]}"
+
+                // OR
+
+                // Post fields probably malformed.
+
+            }
+
+        }
+
     }
 
     /* ********************************************************* */
