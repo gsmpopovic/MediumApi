@@ -63,10 +63,23 @@ class RapidApiMediumApi
     public function setRapidApiHeaders()
     {
 
-        $this->request->headers["X-RapidAPI-Host"] = "X-RapidAPI-Host: " . $this->rapid_api_medium_api_host;
-        $this->request->headers["X-RapidAPI-Key"] = "X-RapidAPI-Key: " . $this->rapid_api_medium_api_key;
+        $this->setRapidApiMediumApiAuthHeaders();
+        
+        $this->request->headers["Content-Type"] = "Content-Type: application/json";
+        $this->request->headers["Accept-Charset"] = "Accept-Charset: utf-8";
+        $this->request->headers["Accept"] = "Accept: application/json";
 
     }
+
+        /* Set the HTTP headers that authorize whether we can access the Rapid Api Medium API. */
+        public function setRapidApiMediumApiAuthHeaders()
+        {
+    
+            $this->request->headers["X-RapidAPI-Host"] = "X-RapidAPI-Host: " . $this->rapid_api_medium_api_host;
+            $this->request->headers["X-RapidAPI-Key"] = "X-RapidAPI-Key: " . $this->rapid_api_medium_api_key;
+    
+        }
+    
 
     /* Erase the HTTP headers that authorize whether we can access the 3rd party API on Rapid API. */
     public function unsetRapidApiHeaders()
