@@ -5,6 +5,8 @@ namespace gsmpopovic\MediumApi;
 class Request
 {
 
+    /* A cURL wrapper with GET and POST functionality. */
+
     public $url = null;
 
     public $response = null;
@@ -31,9 +33,6 @@ class Request
 
     }
 
-    /*
-    @return void
-    */
     public function init()
     {
 
@@ -100,18 +99,6 @@ class Request
         $this->options[CURLOPT_CUSTOMREQUEST] = $this->verb;
 
     }
-
-    /*
-
-    @param string $url
-
-    @param array $options
-
-    @param array $headers
-
-    @return void
-
-    */
 
     public function get($url = null, $options = [], $headers = [])
     {
