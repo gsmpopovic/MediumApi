@@ -2,9 +2,9 @@
 
 // Rapid Api Medium Api use cases 
 
-require_once "RapidApiMediumApi.php";
-require_once "Env.php";
-require_once "Request.php";
+require_once "../RapidApiMediumApi.php";
+require_once "../Env.php";
+require_once "../Request.php";
 
 use gsmpopovic\MediumApi\RapidApiMediumApi;
 use gsmpopovic\MediumApi\Env;

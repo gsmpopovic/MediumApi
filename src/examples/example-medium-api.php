@@ -2,9 +2,9 @@
 
 // Official Medium API Use cases 
 
-require_once "MediumApi.php";
-require_once "Env.php";
-require_once "Request.php";
+require_once "../MediumApi.php";
+require_once "../Env.php";
+require_once "../Request.php";
 
 use gsmpopovic\MediumApi\MediumApi;
 use gsmpopovic\MediumApi\Env;
