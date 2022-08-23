@@ -10,7 +10,10 @@ https://packagist.org/packages/gsmpopovic/medium-api
 
 Install using Composer:
 
+```
 composer require gsmpopovic/medium-api
+
+```
 
 NB: 
 
@@ -24,6 +27,7 @@ both for the official Medium API, and 3rd party Rapid API.
 
 e.g., 
 
+```
 // Official Medium API Use cases 
 
 require_once "../MediumApi.php";
@@ -44,3 +48,5 @@ $env->load();
 $api = new MediumApi(new Request());
 
 $api->getUser();
+
+```
