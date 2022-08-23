@@ -18,3 +18,29 @@ To interact with the official API, you must generate an access token.
 
 All credentials should be set as environment variables, but, barring this, 
 can be manually assigned to the client as properties. 
+
+Examples of API usage can be found in the src/examples directory, 
+both for the official Medium API, and 3rd party Rapid API. 
+
+e.g., 
+
+// Official Medium API Use cases 
+
+require_once "../MediumApi.php";
+require_once "../Env.php";
+require_once "../Request.php";
+
+use gsmpopovic\MediumApi\MediumApi;
+use gsmpopovic\MediumApi\Env;
+use gsmpopovic\MediumApi\Request;
+
+
+$path = dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . ".env";
+
+$env = new Env($path);
+
+$env->load();
+
+$api = new MediumApi(new Request());
+
+$api->getUser();
