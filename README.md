@@ -64,6 +64,10 @@ use gsmpopovic\MediumApi\Env;
 use gsmpopovic\MediumApi\Request;
 
 
+/* 
+You should only load the .env 
+if it hasn't already been loaded elsewhere, as in Laravel. 
+*/
 $path = dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . ".env";
 
 $env = new Env($path);
