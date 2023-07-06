@@ -56,7 +56,7 @@ require_once "../Request.php";
 
 // or, if you're using composer, and have installed this package 
 
-require "vendor/autoload.php"l
+require "vendor/autoload.php";
 
 
 use gsmpopovic\MediumApi\MediumApi;
