@@ -7,6 +7,11 @@ class Request
 
     /* A cURL wrapper. */
 
+    /* 
+    See the docs here:
+    https://www.php.net/manual/en/book.curl.php
+    */
+
     public $base_uri = null; 
 
     public $endpoint = null; 
@@ -17,7 +22,11 @@ class Request
 
     public $exception = null;
 
+    public $verb = null; 
+
     public $err = null;
+
+    public $headers = [];
 
     public $options = [
 
