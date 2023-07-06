@@ -15,6 +15,26 @@ composer require gsmpopovic/medium-api
 
 ```
 
+Setup: 
+
+1. Install via Composer. 
+```
+composer require gsmpopovic/medium-api
+```
+
+2. Add .env variables:
+```
+RAPID_API_MEDIUM_API_KEY= xxx 
+RAPID_API_MEDIUM_API_HOST= xxx
+MEDIUM_USER_NAME= xxx 
+
+OFFICIAL_MEDIUM_API_ACCESS_TOKEN= xxx
+OFFICIAL_MEDIUM_API_VERSION=v1
+```
+
+3. Use classes in your code, as per the example files. 
+-------------------------------------------------------
+
 NB: 
 
 To interact with the official API, you must generate an access token.
@@ -33,6 +53,11 @@ e.g.,
 require_once "../MediumApi.php";
 require_once "../Env.php";
 require_once "../Request.php";
+
+// or, if you're using composer, and have installed this package 
+
+require "vendor/autoload.php"l
+
 
 use gsmpopovic\MediumApi\MediumApi;
 use gsmpopovic\MediumApi\Env;
